@@ -21,11 +21,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Lee Kendall
- * @author Wesley Murray 
+ * @author Wesley Murray
  */
 
-public class ServerImplementation implements Server
-{
+public class ServerImplementation implements Server {
 
 	private ConcurrentHashMap<String, Account> loginMap = new ConcurrentHashMap<String, Account>();
 	private ConcurrentHashMap<String, Account> cookieMap = new ConcurrentHashMap<String, Account>();
@@ -35,8 +34,7 @@ public class ServerImplementation implements Server
 	/**
 	 * Initializes server with default objects for testing purposes.
 	 */
-	public ServerImplementation() throws RemoteException
-	{
+	public ServerImplementation() throws RemoteException {
 		Department dpt = new Department();
 		this.departmentMap.put("default", dpt);
 
@@ -68,11 +66,11 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#logIn(java.lang.String,
 	 * java.lang.String)
 	 */
-	public String logIn(String username, String password)
-	{
+	public String logIn(String username, String password) {
 		if (!this.loginMap.containsKey(username))// checks username is valid
 		{
 			throw new IllegalArgumentException("Invalid username and/or password");
@@ -86,17 +84,16 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#getPlan(java.lang.String,
 	 * java.lang.String)
 	 */
-	public PlanFile getPlan(String year, String cookie)
-	{
+	public PlanFile getPlan(String year, String cookie) {
 		cookieChecker(cookie);// checks that cookie is valid
 
 		Account userAccount = this.cookieMap.get(cookie);
 		Department department = userAccount.getDepartment();
-		if (!department.containsPlan(year))
-		{
+		if (!department.containsPlan(year)) {
 			throw new IllegalArgumentException("Plan doesn't exist within your department");
 
 		}
@@ -105,12 +102,12 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * software_masters.planner_networking.Server#getPlanOutline(java.lang.String,
 	 * java.lang.String)
 	 */
-	public PlanFile getPlanOutline(String name, String cookie)
-	{
+	public PlanFile getPlanOutline(String name, String cookie) {
 		cookieChecker(cookie);// checks that cookie is valid
 
 		if (!this.planTemplateMap.containsKey(name))// checks plan template exists
@@ -124,11 +121,11 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#savePlan(software_masters.
 	 * planner_networking.PlanFile, java.lang.String)
 	 */
-	public void savePlan(PlanFile plan, String cookie)
-	{
+	public void savePlan(PlanFile plan, String cookie) {
 		Integer.parseInt(plan.getYear());
 		cookieChecker(cookie);// checks that cookie is valid
 
@@ -140,8 +137,7 @@ public class ServerImplementation implements Server
 		Account userAccount = this.cookieMap.get(cookie);
 		Department dept = userAccount.getDepartment();
 
-		if (dept.containsPlan(plan.getYear()))
-		{
+		if (dept.containsPlan(plan.getYear())) {
 			PlanFile oldPlan = dept.getPlan(plan.getYear());
 			if (!oldPlan.isCanEdit())// checks planFile is editable
 			{
@@ -155,11 +151,11 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#addUser(java.lang.String,
 	 * java.lang.String, java.lang.String, boolean, java.lang.String)
 	 */
-	public void addUser(String username, String password, String departmentName, boolean isAdmin, String cookie)
-	{
+	public void addUser(String username, String password, String departmentName, boolean isAdmin, String cookie) {
 		cookieChecker(cookie);// checks that cookie is valid and that user is admin
 		adminChecker(cookie);
 
@@ -179,26 +175,22 @@ public class ServerImplementation implements Server
 	 * 
 	 * @return String cookie
 	 */
-	private String cookieMaker()
-	{
+	private String cookieMaker() {
 		int leftLimit = 33; // letter 'a'
 		int rightLimit = 122; // letter 'z'
 		int targetStringLength = 25;
 		Random random = new Random();
 		String generatedString;
 		StringBuilder buffer = new StringBuilder(targetStringLength);
-		for (int i = 0; i < targetStringLength; i++)
-		{
+		for (int i = 0; i < targetStringLength; i++) {
 			int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
 			buffer.append((char) randomLimitedInt);
 		}
 		generatedString = buffer.toString();
 
-		while (this.cookieMap.containsKey(generatedString))
-		{
+		while (this.cookieMap.containsKey(generatedString)) {
 			buffer = new StringBuilder(targetStringLength);
-			for (int i = 0; i < targetStringLength; i++)
-			{
+			for (int i = 0; i < targetStringLength; i++) {
 				int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
 				buffer.append((char) randomLimitedInt);
 			}
@@ -209,18 +201,17 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#flagPlan(java.lang.String,
 	 * java.lang.String, boolean, java.lang.String)
 	 */
-	public void flagPlan(String departmentName, String year, boolean canEdit, String cookie)
-	{
+	public void flagPlan(String departmentName, String year, boolean canEdit, String cookie) {
 		cookieChecker(cookie);// checks that cookie is valid and that user is admin
 		adminChecker(cookie);
 		departmentChecker(departmentName);
 
 		Department dept = this.departmentMap.get(departmentName);
-		if (!dept.containsPlan(year))
-		{
+		if (!dept.containsPlan(year)) {
 			throw new IllegalArgumentException("Plan doesn't exist");
 
 		}
@@ -230,12 +221,12 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * software_masters.planner_networking.Server#addDepartment(java.lang.String,
 	 * java.lang.String)
 	 */
-	public void addDepartment(String departmentName, String cookie)
-	{
+	public void addDepartment(String departmentName, String cookie) {
 		cookieChecker(cookie);// checks that cookie is valid and that user is admin
 		adminChecker(cookie);
 
@@ -245,14 +236,12 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * software_masters.planner_networking.Server#addPlanTemplate(java.lang.String,
 	 * software_masters.planner_networking.PlanFile)
 	 */
-	public void addPlanTemplate(String name, PlanFile plan)
-	{
-		this.planTemplateMap.put(name, plan);
-	}
+	public void addPlanTemplate(String name, PlanFile plan) { this.planTemplateMap.put(name, plan); }
 
 	/**
 	 * Loads server from xml, called in main
@@ -260,8 +249,7 @@ public class ServerImplementation implements Server
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public static ServerImplementation load() throws FileNotFoundException
-	{
+	public static ServerImplementation load() throws FileNotFoundException {
 		String filepath = "PlannerServer.serv";
 		XMLDecoder decoder = null;
 		decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(filepath)));
@@ -272,18 +260,15 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#save()
 	 */
-	public void save()
-	{
+	public void save() {
 		String filename = "PlannerServer.serv";
 		XMLEncoder encoder = null;
-		try
-		{
+		try {
 			encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(filename)));
-		}
-		catch (FileNotFoundException fileNotFound)
-		{
+		} catch (FileNotFoundException fileNotFound) {
 			System.out.println("ERROR: While Creating or Opening the File " + filename);
 		}
 		encoder.writeObject(this);
@@ -297,10 +282,8 @@ public class ServerImplementation implements Server
 	 * @param cookie
 	 * @throws IllegalArgumentException
 	 */
-	private void cookieChecker(String cookie)
-	{
-		if (!this.cookieMap.containsKey(cookie))
-		{
+	private void cookieChecker(String cookie) {
+		if (!this.cookieMap.containsKey(cookie)) {
 			throw new IllegalArgumentException("Need to log in");
 
 		}
@@ -313,8 +296,7 @@ public class ServerImplementation implements Server
 	 * @param cookie
 	 * @throws IllegalArgumentException
 	 */
-	private void adminChecker(String cookie)
-	{
+	private void adminChecker(String cookie) {
 		if (!this.cookieMap.get(cookie).isAdmin())// Checks that user is admin
 		{
 			throw new IllegalArgumentException("You're not an admin");
@@ -327,105 +309,88 @@ public class ServerImplementation implements Server
 	 * @param name
 	 * @throws IllegalArgumentException
 	 */
-	private void departmentChecker(String name)
-	{
-		if (!this.departmentMap.containsKey(name))
-		{
-			throw new IllegalArgumentException("Deparment doesn't exist");
-		}
+	private void departmentChecker(String name) {
+		if (!this.departmentMap.containsKey(name)) { throw new IllegalArgumentException("Deparment doesn't exist"); }
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#getLoginMap()
 	 */
-	public ConcurrentHashMap<String, Account> getLoginMap()
-	{
-		return loginMap;
-	}
+	public ConcurrentHashMap<String, Account> getLoginMap() { return loginMap; }
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * software_masters.planner_networking.Server#setLoginMap(java.util.concurrent.
 	 * ConcurrentHashMap)
 	 */
-	public void setLoginMap(ConcurrentHashMap<String, Account> loginMap)
-	{
-		this.loginMap = loginMap;
-	}
+	public void setLoginMap(ConcurrentHashMap<String, Account> loginMap) { this.loginMap = loginMap; }
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#getCookieMap()
 	 */
-	public ConcurrentHashMap<String, Account> getCookieMap()
-	{
-		return cookieMap;
-	}
+	public ConcurrentHashMap<String, Account> getCookieMap() { return cookieMap; }
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * software_masters.planner_networking.Server#setCookieMap(java.util.concurrent.
 	 * ConcurrentHashMap)
 	 */
-	public void setCookieMap(ConcurrentHashMap<String, Account> cookieMap)
-	{
-		this.cookieMap = cookieMap;
-	}
+	public void setCookieMap(ConcurrentHashMap<String, Account> cookieMap) { this.cookieMap = cookieMap; }
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#getDepartmentMap()
 	 */
-	public ConcurrentHashMap<String, Department> getDepartmentMap()
-	{
-		return departmentMap;
-	}
+	public ConcurrentHashMap<String, Department> getDepartmentMap() { return departmentMap; }
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#setDepartmentMap(java.util.
 	 * concurrent.ConcurrentHashMap)
 	 */
-	public void setDepartmentMap(ConcurrentHashMap<String, Department> departmentMap)
-	{
+	public void setDepartmentMap(ConcurrentHashMap<String, Department> departmentMap) {
 		this.departmentMap = departmentMap;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#getPlanTemplateMap()
 	 */
-	public ConcurrentHashMap<String, PlanFile> getPlanTemplateMap()
-	{
-		return planTemplateMap;
-	}
+	public ConcurrentHashMap<String, PlanFile> getPlanTemplateMap() { return planTemplateMap; }
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#setPlanTemplateMap(java.util.
 	 * concurrent.ConcurrentHashMap)
 	 */
-	public void setPlanTemplateMap(ConcurrentHashMap<String, PlanFile> planTemplateMap)
-	{
+	public void setPlanTemplateMap(ConcurrentHashMap<String, PlanFile> planTemplateMap) {
 		this.planTemplateMap = planTemplateMap;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#listPlanTemplates()
 	 */
-	public Collection<PlanFile> listPlanTemplates()
-	{
+	public Collection<PlanFile> listPlanTemplates() {
 		Collection<PlanFile> collections = planTemplateMap.values();
 		LinkedList<PlanFile> list = new LinkedList<PlanFile>();
 		Iterator<PlanFile> iter = collections.iterator();
 		PlanFile temp;
 		String name;
-		for (Enumeration<String> e = planTemplateMap.keys(); e.hasMoreElements();)
-		{
+		for (Enumeration<String> e = planTemplateMap.keys(); e.hasMoreElements();) {
 			name = e.nextElement();
 			temp = iter.next();
 			list.add(new PlanFile(name, temp.isCanEdit(), null));
@@ -436,10 +401,10 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#listPlans(java.lang.String)
 	 */
-	public Collection<PlanFile> listPlans(String cookie)
-	{
+	public Collection<PlanFile> listPlans(String cookie) {
 		cookieChecker(cookie);// checks that cookie is valid
 
 		Account userAccount = this.cookieMap.get(cookie);
@@ -448,8 +413,7 @@ public class ServerImplementation implements Server
 		Collection<PlanFile> collections = department.getPlanFileMap().values();
 		LinkedList<PlanFile> list = new LinkedList<PlanFile>();
 		PlanFile temp;
-		for (Iterator<PlanFile> iter = collections.iterator(); iter.hasNext();)
-		{
+		for (Iterator<PlanFile> iter = collections.iterator(); iter.hasNext();) {
 			temp = iter.next();
 			list.add(new PlanFile(temp.getYear(), temp.isCanEdit(), null));
 		}
@@ -459,49 +423,28 @@ public class ServerImplementation implements Server
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see software_masters.planner_networking.Server#equals(java.lang.Object)
 	 */
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
 		ServerImplementation other = (ServerImplementation) obj;
-		if (cookieMap == null)
-		{
-			if (other.cookieMap != null)
-				return false;
-		}
-		else
-			if (!ServerImplementation.<String, Account>hashesEqual(cookieMap, other.cookieMap))
-				return false;
-		if (departmentMap == null)
-		{
-			if (other.departmentMap != null)
-				return false;
-		}
-		else
-			if (!ServerImplementation.<String, Department>hashesEqual(departmentMap, other.departmentMap))
-				return false;
-		if (loginMap == null)
-		{
-			if (other.loginMap != null)
-				return false;
-		}
-		else
-			if (!ServerImplementation.<String, Account>hashesEqual(loginMap, other.loginMap))
-				return false;
-		if (planTemplateMap == null)
-		{
-			if (other.planTemplateMap != null)
-				return false;
-		}
-		else
-			if (!ServerImplementation.<String, PlanFile>hashesEqual(planTemplateMap, other.planTemplateMap))
-				return false;
+		if (cookieMap == null) {
+			if (other.cookieMap != null) return false;
+		} else if (!ServerImplementation.<String, Account>hashesEqual(cookieMap, other.cookieMap)) return false;
+		if (departmentMap == null) {
+			if (other.departmentMap != null) return false;
+		} else if (!ServerImplementation.<String, Department>hashesEqual(departmentMap, other.departmentMap))
+			return false;
+		if (loginMap == null) {
+			if (other.loginMap != null) return false;
+		} else if (!ServerImplementation.<String, Account>hashesEqual(loginMap, other.loginMap)) return false;
+		if (planTemplateMap == null) {
+			if (other.planTemplateMap != null) return false;
+		} else if (!ServerImplementation.<String, PlanFile>hashesEqual(planTemplateMap, other.planTemplateMap))
+			return false;
 		return true;
 	}
 
@@ -512,27 +455,21 @@ public class ServerImplementation implements Server
 	 * @param map2
 	 * @return
 	 */
-	private static <K, V> boolean hashesEqual(ConcurrentHashMap<K, V> map1, ConcurrentHashMap<K, V> map2)
-	{
-		for (Enumeration<K> keyList = map1.keys(); keyList.hasMoreElements();)
-		{
+	private static <K, V> boolean hashesEqual(ConcurrentHashMap<K, V> map1, ConcurrentHashMap<K, V> map2) {
+		for (Enumeration<K> keyList = map1.keys(); keyList.hasMoreElements();) {
 			K key = keyList.nextElement();
-			if (!map1.containsKey(key))
-				return false;
-			if (!map2.containsKey(key))
-				return false;
-			if (!map1.get(key).equals(map2.get(key)))
-				return false;
+			if (!map1.containsKey(key)) return false;
+			if (!map2.containsKey(key)) return false;
+			if (!map1.get(key).equals(map2.get(key))) return false;
 		}
 		return true;
 	}
-	
-	
+
 	/**
-	 * Attribute for singleton pattern 
+	 * Attribute for singleton pattern
 	 */
-	private static Server server=null;
-	
+	private static Server server = null;
+
 	/**
 	 * Helper static method that allows us to use singleton pattern for testing.
 	 * Ensures server being tested is an object with known values.
@@ -541,7 +478,7 @@ public class ServerImplementation implements Server
 		if (server == null) {
 			System.out.println("Starting New Server");
 			Registry registry = null;
-			Server stub=null;
+			Server stub = null;
 			try {
 				server = new ServerImplementation();
 				registry = LocateRegistry.createRegistry(1060);
@@ -557,7 +494,7 @@ public class ServerImplementation implements Server
 		}
 		System.out.println("Connecting to Existing Server");
 	}
-	
+
 	/**
 	 * Helper static method that enforces a modified singleton pattern for program.
 	 * Constructor is not private because XML serialization.
@@ -566,7 +503,7 @@ public class ServerImplementation implements Server
 		if (server == null) {
 			System.out.println("Starting New Server");
 			Registry registry = null;
-			Server stub=null;
+			Server stub = null;
 			try {
 				server = ServerImplementation.load();
 				registry = LocateRegistry.createRegistry(1060);
@@ -592,8 +529,5 @@ public class ServerImplementation implements Server
 	 * @param args
 	 * @throws RemoteException
 	 */
-	public static void main(String[] args) throws RemoteException
-	{
-		ServerImplementation.spawn();
-	}
+	public static void main(String[] args) throws RemoteException { ServerImplementation.spawn(); }
 }

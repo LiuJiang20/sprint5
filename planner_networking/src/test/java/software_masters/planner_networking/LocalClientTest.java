@@ -16,8 +16,7 @@ import org.junit.Test;
  * @author lee Kendall
  * @author Wes Murray Verifies that client methods work correctly.
  */
-public class LocalClientTest
-{
+public class LocalClientTest {
 
 	/**
 	 * The server is initialized with two accounts - an Admin(Username: admin,
@@ -33,17 +32,14 @@ public class LocalClientTest
 	static Registry registry;
 
 	/**
-	 * @throws Exception
-	 *                       Sets up RMI registry, ensures that a server is pulled
-	 *                       from the registry, and sets up a client. The server and
-	 *                       client are used for subsequent tests.
+	 * @throws Exception Sets up RMI registry, ensures that a server is pulled from
+	 *                   the registry, and sets up a client. The server and client
+	 *                   are used for subsequent tests.
 	 */
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception
-	{
+	public static void setUpBeforeClass() throws Exception {
 		System.out.println("Starting Test");
-		try
-		{
+		try {
 			registry = LocateRegistry.createRegistry(1075);
 			ServerImplementation server = new ServerImplementation();
 			actualServer = server;
@@ -51,9 +47,7 @@ public class LocalClientTest
 			registry.rebind("PlannerServer", stub);
 			testServer = (Server) registry.lookup("PlannerServer");
 			testClient = new Client(testServer);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -61,8 +55,7 @@ public class LocalClientTest
 	}
 
 	@AfterClass
-	public static void tearDownAfterClass() throws Exception
-	{
+	public static void tearDownAfterClass() throws Exception {
 		registry.unbind("PlannerServer");
 		// Unexport; this will also remove us from the RMI runtime
 		UnicastRemoteObject.unexportObject(registry, true);
@@ -77,8 +70,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testLogin() throws IllegalArgumentException, RemoteException
-	{
+	public void testLogin() throws IllegalArgumentException, RemoteException {
 
 		// Checks invalid cases
 		assertThrows(IllegalArgumentException.class, () -> testClient.login("invalidUsername", "invalidPassword"));
@@ -99,8 +91,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAddUser() throws IllegalArgumentException, RemoteException
-	{
+	public void testAddUser() throws IllegalArgumentException, RemoteException {
 
 		// tests non-admin addUser
 		testClient.login("user", "user");
@@ -131,8 +122,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAddDepartment() throws IllegalArgumentException, RemoteException
-	{
+	public void testAddDepartment() throws IllegalArgumentException, RemoteException {
 		// tests non-admin addDepartment
 		testClient.login("user", "user");
 		assertThrows(IllegalArgumentException.class, () -> testClient.addDepartment("newDepartment"));
@@ -154,8 +144,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testFlagPlan() throws IllegalArgumentException, RemoteException
-	{
+	public void testFlagPlan() throws IllegalArgumentException, RemoteException {
 		// tests non-admin flagFile
 		testClient.login("user", "user");
 		assertThrows(IllegalArgumentException.class, () -> testClient.flagPlan("default", "2019", false));
@@ -180,8 +169,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testGetPlan() throws IllegalArgumentException, RemoteException
-	{
+	public void testGetPlan() throws IllegalArgumentException, RemoteException {
 		// plan does not exist throws exception
 		testClient.login("user", "user");
 		assertThrows(IllegalArgumentException.class, () -> testClient.getPlan("2000"));
@@ -199,8 +187,7 @@ public class LocalClientTest
 	 * @throws RemoteException
 	 */
 	@Test
-	public void testGetPlanOutline() throws RemoteException
-	{
+	public void testGetPlanOutline() throws RemoteException {
 		testClient.login("user", "user");
 
 		// build expected file.
@@ -222,8 +209,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testpushPlan() throws IllegalArgumentException, RemoteException
-	{
+	public void testpushPlan() throws IllegalArgumentException, RemoteException {
 		// change canEdit flag to false for default planfile
 		testClient.login("admin", "admin");
 		testClient.flagPlan("default", "2019", false);
@@ -258,8 +244,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testAddBranch() throws IllegalArgumentException, RemoteException
-	{
+	public void testAddBranch() throws IllegalArgumentException, RemoteException {
 		testClient.login("user", "user");
 		//////////////////////////////////// Centre
 		//////////////////////////////////// example/////////////////////////////////////////////
@@ -305,16 +290,15 @@ public class LocalClientTest
 	 * @throws RemoteException
 	 * @throws IllegalArgumentException
 	 */
-	private void testBranchCopy() throws IllegalArgumentException, RemoteException
-	{
+	private void testBranchCopy() throws IllegalArgumentException, RemoteException {
 		testClient.addBranch();
 		assertTrue(testClient.getCurrNode().testEquals(testClient.getCurrNode().getParent().getChildren().get(1)));
-		
+
 		// assures deep copy not shallow. this is tested by changing one copy and
 		// verifying that the original was not changed.
 		testClient.getCurrNode().getParent().getChildren().get(1).setData("some text");
 		assertFalse(testClient.getCurrNode().testEquals(testClient.getCurrNode().getParent().getChildren().get(1)));
-		
+
 	}
 
 	/**
@@ -325,8 +309,7 @@ public class LocalClientTest
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testCentreRemoveBranch() throws IllegalArgumentException, RemoteException
-	{
+	public void testCentreRemoveBranch() throws IllegalArgumentException, RemoteException {
 		testClient.login("user", "user");
 		//////////////////////////////////// Centre
 		//////////////////////////////////// example/////////////////////////////////////////////
@@ -353,8 +336,7 @@ public class LocalClientTest
 	 * @throws RemoteException
 	 */
 	@Test
-	public void testVMOSARemoveBranch() throws RemoteException
-	{
+	public void testVMOSARemoveBranch() throws RemoteException {
 		/////////////////////////////////// VMOSA
 		/////////////////////////////////// example///////////////////////////////////////////////
 		Plan VMOSA_test = new VMOSA();
@@ -381,8 +363,7 @@ public class LocalClientTest
 	 * @throws RemoteException
 	 */
 	@Test
-	public void testIowaRemoveBranch() throws RemoteException
-	{
+	public void testIowaRemoveBranch() throws RemoteException {
 		/////////////////////////////////// Iowa state
 		/////////////////////////////////// example///////////////////////////////////////////////
 		Plan IOWA_test = new IowaState();

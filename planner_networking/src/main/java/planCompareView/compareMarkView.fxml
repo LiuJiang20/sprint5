@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planCompareView.compareMarkViewController">
+   <center>
+      <HBox prefHeight="400.0" prefWidth="434.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane>
+               <center>
+                  <TreeView fx:id="treeViewA" prefHeight="339.0" prefWidth="316.0" />
+               </center>
+               <top>
+                  <Label fx:id="labelA" text="Business plan A" BorderPane.alignment="CENTER" />
+               </top>
+            </BorderPane>
+            <BorderPane>
+               <center>
+                  <TreeView fx:id="treeViewB" prefHeight="339.0" prefWidth="330.0" />
+               </center>
+               <top>
+                  <Label fx:id="labelB" text="Business plan B" BorderPane.alignment="CENTER" />
+               </top>
+            </BorderPane>
+         </children>
+      </HBox>
+   </center>
+   <top>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="44.0" prefWidth="600.0" text="Result of comparison is displayed below. The difference has been marked by plus sign" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#close" prefHeight="27.0" prefWidth="162.0" text="Close" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

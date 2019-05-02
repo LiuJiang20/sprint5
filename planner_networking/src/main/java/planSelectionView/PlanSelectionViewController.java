@@ -14,8 +14,7 @@ import software_masters.planner_networking.PlanFile;
 /**
  * @author lee.kendall MVC Controller for the plan selection view
  */
-public class PlanSelectionViewController
-{
+public class PlanSelectionViewController {
 
 	@FXML
 	private ListView<PlanFile> planTemplateList;
@@ -28,12 +27,10 @@ public class PlanSelectionViewController
 	/**
 	 * Resets client's cookie and planFile, displays the login window
 	 * 
-	 * @param event
-	 *                  Action
+	 * @param event Action
 	 */
 	@FXML
-	public void Logout(ActionEvent event)
-	{
+	public void Logout(ActionEvent event) {
 		app.getModel().setCookie(null);
 		app.getModel().setCurrNode(null);
 		app.getModel().setCurrPlanFile(null);
@@ -45,11 +42,9 @@ public class PlanSelectionViewController
 	 * showLoginView methods in the main application. Also populates the listviews
 	 * with genTemplateList and genPlansList
 	 * 
-	 * @param app
-	 *                main application
+	 * @param app main application
 	 */
-	public void setApplication(Main app)
-	{
+	public void setApplication(Main app) {
 		this.app = app;
 		genPlansList();
 		genTemplateList();
@@ -60,19 +55,15 @@ public class PlanSelectionViewController
 	 * 
 	 * @return
 	 */
-	public void genTemplateList()
-	{
+	public void genTemplateList() {
 		ObservableList<PlanFile> items = null;
-		try
-		{
+		try {
 			items = FXCollections.observableArrayList(this.app.getModel().listPlanTemplates());
-		}
-		catch (RemoteException e)
-		{
+		} catch (RemoteException e) {
 			this.app.showConnectToServer();
 		}
 		planTemplateList.setItems(items);
-		
+
 	}
 
 	/**
@@ -80,15 +71,11 @@ public class PlanSelectionViewController
 	 * 
 	 * @return
 	 */
-	public void genPlansList()
-	{
+	public void genPlansList() {
 		ObservableList<PlanFile> items = null;
-		try
-		{
+		try {
 			items = FXCollections.observableArrayList(this.app.getModel().listPlans());
-		}
-		catch (RemoteException e)
-		{
+		} catch (RemoteException e) {
 			this.app.showConnectToServer();
 		}
 		departmentPlanList.setItems(items);
@@ -99,21 +86,15 @@ public class PlanSelectionViewController
 	 * This method lists all the plan templates.
 	 */
 	@FXML
-	public void openPlanTemplate()
-	{
+	public void openPlanTemplate() {
 		PlanFile selected = this.planTemplateList.getSelectionModel().getSelectedItem();
-		try
-		{
+		try {
 			this.app.getModel().getPlanOutline(selected.getYear());
-		}
-		catch (IllegalArgumentException e)
-		{
+		} catch (IllegalArgumentException e) {
 			System.out.println("Invalid plan template");
 			this.app.showPlanSelectionView();
 			return;
-		}
-		catch (RemoteException e)
-		{
+		} catch (RemoteException e) {
 			this.app.showConnectToServer();
 			return;
 		}
@@ -125,32 +106,23 @@ public class PlanSelectionViewController
 	 * This method lists all the plans associated with the user's department
 	 */
 	@FXML
-	public void openPlan()
-	{
+	public void openPlan() {
 		PlanFile selected = this.departmentPlanList.getSelectionModel().getSelectedItem();
-		try
-		{
+		try {
 			this.app.getModel().getPlan(selected.getYear());
-		}
-		catch (IllegalArgumentException e)
-		{
+		} catch (IllegalArgumentException e) {
 			System.out.println("Invalid plan template");
 			this.app.showPlanSelectionView();
 			return;
-		}
-		catch (RemoteException e)
-		{
+		} catch (RemoteException e) {
 			this.app.showConnectToServer();
 			return;
 		}
 
-		if (selected.isCanEdit())
-		{
+		if (selected.isCanEdit()) {
 			this.app.showPlanEditView();
 			return;
-		}
-		else
-		{
+		} else {
 			this.app.showPlanReadOnlyView();
 			return;
 		}

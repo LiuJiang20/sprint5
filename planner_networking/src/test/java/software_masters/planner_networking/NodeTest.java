@@ -6,12 +6,10 @@ import java.rmi.RemoteException;
 
 import org.junit.Test;
 
-public class NodeTest
-{
+public class NodeTest {
 
 	@Test
-	public void test() throws RemoteException
-	{
+	public void test() throws RemoteException {
 		// make node +
 		// add child +
 		// remove child

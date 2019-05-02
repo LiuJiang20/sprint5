@@ -10,14 +10,12 @@ import javafx.scene.control.TextField;
 /**
  * @author software masters
  */
-class LoginTest extends GuiTestBase
-{
+class LoginTest extends GuiTestBase {
 	/**
 	 * Main test which calls other tests in sequential order
 	 */
 	@Test
-	void mainTest()
-	{
+	void mainTest() {
 		clickOn("Connect");
 		testDefaultValues();
 		testInvalidUser();
@@ -29,24 +27,16 @@ class LoginTest extends GuiTestBase
 	/**
 	 * Verifies that labels are populated with the intended text
 	 */
-	private void testDefaultValues()
-	{
-		verifyThat("#usernameLabel", (Label label) ->
-		{
-			return label.getText().equals("Username");
-		});
-		verifyThat("#passwordLabel", (Label label) ->
-		{
-			return label.getText().equals("Password");
-		});
+	private void testDefaultValues() {
+		verifyThat("#usernameLabel", (Label label) -> { return label.getText().equals("Username"); });
+		verifyThat("#passwordLabel", (Label label) -> { return label.getText().equals("Password"); });
 	}
 
 	/**
 	 * Verifies that the plan selection window is not displayed when invalid
 	 * username is entered, by checking that the username label is still present
 	 */
-	private void testInvalidUser()
-	{
+	private void testInvalidUser() {
 		clickOn("#usernameField");
 		write("INVALID USERNAME");
 		clickOn("#loginButton");
@@ -61,8 +51,7 @@ class LoginTest extends GuiTestBase
 	 * Verifies that the plan selection window is not displayed when invalid
 	 * password is entered, by checking that the username label is still present
 	 */
-	private void testInvalidPassword()
-	{
+	private void testInvalidPassword() {
 		clickOn("#passwordField");
 		write("INVALID PASSWORD");
 		clickOn("#loginButton");
@@ -78,8 +67,7 @@ class LoginTest extends GuiTestBase
 	 * username and password is entered, by checking that the username label is
 	 * still present
 	 */
-	private void testInvalidUsernameAndPassword()
-	{
+	private void testInvalidUsernameAndPassword() {
 		clickOn("#passwordField");
 		write("INVALID PASSWORD");
 		clickOn("#usernameField");
@@ -98,13 +86,9 @@ class LoginTest extends GuiTestBase
 	 * Verifies that the plan selection window is displayed when a valid username
 	 * and password is entered, by checking that the select plan label is present.
 	 */
-	private void testValidLogin()
-	{
+	private void testValidLogin() {
 		clickOn("#loginButton");
-		verifyThat("#selectPlanLabel", (Label label) ->
-		{
-			return label.getText().equals("Select Plan");
-		});
+		verifyThat("#selectPlanLabel", (Label label) -> { return label.getText().equals("Select Plan"); });
 
 	}
 

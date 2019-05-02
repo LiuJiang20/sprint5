@@ -7,8 +7,7 @@ import application.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class ServerConnectionViewController
-{
+public class ServerConnectionViewController {
 	Main application;
 	@FXML
 	TextField ipAddress;
@@ -16,30 +15,19 @@ public class ServerConnectionViewController
 	TextField port;
 
 	@FXML
-	public void connect()
-	{
-		try
-		{
+	public void connect() {
+		try {
 			application.getModel().connectToServer(ipAddress.getText(), Integer.parseInt(port.getText()));
 			application.showLoginView();
-		}
-		catch (NumberFormatException e)
-		{
+		} catch (NumberFormatException e) {
 			application.sendError("cannot connect to server");
-		}
-		catch (RemoteException e)
-		{
+		} catch (RemoteException e) {
 			application.sendError("cannot connect to server");
-		}
-		catch (NotBoundException e)
-		{
+		} catch (NotBoundException e) {
 			application.sendError("cannot connect to server");
 		}
 	}
 
-	public void setApplication(Main application)
-	{
-		this.application = application;
-	}
+	public void setApplication(Main application) { this.application = application; }
 
 }

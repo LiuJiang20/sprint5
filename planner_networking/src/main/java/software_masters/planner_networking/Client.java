@@ -10,8 +10,7 @@ import java.util.Collection;
  * @author lee kendall and wesley murray
  */
 
-public class Client
-{
+public class Client {
 
 	/**
 	 * This class represents the client which users interact with. It includes
@@ -22,24 +21,19 @@ public class Client
 	private PlanFile currPlanFile;
 	private Node currNode;
 	private Server server;
+	private String username;
 
 	/**
 	 * Default constructor.
 	 */
-	public Client()
-	{
-		this.server = null;
-	}
+	public Client() { this.server = null; }
 
 	/**
 	 * Sets the client's server.
 	 * 
 	 * @param server
 	 */
-	public Client(Server server)
-	{
-		this.server = server;
-	}
+	public Client(Server server) { this.server = server; }
 
 	/**
 	 * @param ip
@@ -47,8 +41,7 @@ public class Client
 	 * @throws RemoteException
 	 * @throws NotBoundException
 	 */
-	public void connectToServer(String ip, int port) throws RemoteException, NotBoundException
-	{
+	public void connectToServer(String ip, int port) throws RemoteException, NotBoundException {
 		String hostName = ip;
 		Registry registry = LocateRegistry.getRegistry(hostName, port);
 		Server stub = (Server) registry.lookup("PlannerServer");
@@ -63,12 +56,14 @@ public class Client
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public void login(String username, String password) throws IllegalArgumentException, RemoteException
-	{
+	public void login(String username, String password) throws IllegalArgumentException, RemoteException {
 		this.currPlanFile = null;
 		this.currNode = null;
+		this.username = username;
 		this.cookie = server.logIn(username, password);
 	}
+
+
 
 	/**
 	 * Returns planFile object from the user's department given a year. Throws
@@ -78,10 +73,14 @@ public class Client
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public void getPlan(String year) throws IllegalArgumentException, RemoteException
-	{
+	public void getPlan(String year) throws IllegalArgumentException, RemoteException {
 		this.currPlanFile = server.getPlan(year, this.cookie);
 		this.currNode = this.currPlanFile.getPlan().getRoot();
+	}
+
+	public PlanFile returnPlanFile(String year) throws IllegalArgumentException, RemoteException {
+		return getServer().getPlan(year, getCookie());
+
 	}
 
 	/**
@@ -92,8 +91,7 @@ public class Client
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public void getPlanOutline(String name) throws IllegalArgumentException, RemoteException
-	{
+	public void getPlanOutline(String name) throws IllegalArgumentException, RemoteException {
 		this.currPlanFile = server.getPlanOutline(name, this.cookie);
 		this.currNode = this.currPlanFile.getPlan().getRoot();
 	}
@@ -106,8 +104,7 @@ public class Client
 	 * @param plan
 	 * @throws IllegalArgumentException
 	 */
-	public void pushPlan(PlanFile plan) throws IllegalArgumentException, RemoteException
-	{
+	public void pushPlan(PlanFile plan) throws IllegalArgumentException, RemoteException {
 		server.savePlan(plan, this.cookie);
 	}
 
@@ -123,8 +120,7 @@ public class Client
 	 * @throws IllegalArgumentException
 	 */
 	public void addUser(String username, String password, String departmentName, boolean isAdmin)
-			throws IllegalArgumentException, RemoteException
-	{
+			throws IllegalArgumentException, RemoteException {
 		server.addUser(username, password, departmentName, isAdmin, this.cookie);
 	}
 
@@ -137,8 +133,7 @@ public class Client
 	 * @throws IllegalArgumentException
 	 */
 	public void flagPlan(String departmentName, String year, boolean canEdit)
-			throws IllegalArgumentException, RemoteException
-	{
+			throws IllegalArgumentException, RemoteException {
 		server.flagPlan(departmentName, year, canEdit, this.cookie);
 
 	}
@@ -149,8 +144,7 @@ public class Client
 	 * @param departmentName
 	 * @throws IllegalArgumentException
 	 */
-	public void addDepartment(String departmentName) throws IllegalArgumentException, RemoteException
-	{
+	public void addDepartment(String departmentName) throws IllegalArgumentException, RemoteException {
 		server.addDepartment(departmentName, this.cookie);
 
 	}
@@ -161,8 +155,7 @@ public class Client
 	 * @throws IllegalArgumentException
 	 * @throws RemoteException
 	 */
-	public void addBranch() throws IllegalArgumentException, RemoteException
-	{
+	public void addBranch() throws IllegalArgumentException, RemoteException {
 		this.currPlanFile.getPlan().addNode(this.currNode.getParent());
 	}
 
@@ -171,8 +164,7 @@ public class Client
 	 * 
 	 * @throws IllegalArgumentException
 	 */
-	public void removeBranch() throws IllegalArgumentException
-	{
+	public void removeBranch() throws IllegalArgumentException {
 		Node temp = this.currNode.getParent();
 		this.currPlanFile.getPlan().removeNode(this.currNode);
 		this.currNode = temp.getChildren().get(0);
@@ -181,120 +173,82 @@ public class Client
 	/**
 	 * @return collection of planfiles associated with the client's department
 	 */
-	public Collection<PlanFile> listPlans() throws RemoteException
-	{
-		return server.listPlans(this.cookie);
-	}
+	public Collection<PlanFile> listPlans() throws RemoteException { return server.listPlans(this.cookie); }
 
 	/**
 	 * @return collection of plan templates held by the server
 	 */
-	public Collection<PlanFile> listPlanTemplates() throws RemoteException
-	{
-		return server.listPlanTemplates();
-	}
+	public Collection<PlanFile> listPlanTemplates() throws RemoteException { return server.listPlanTemplates(); }
 
 	/**
 	 * Sets the data held in the currently accessed node
 	 * 
 	 * @param data
 	 */
-	public void editData(String data)
-	{
-		this.currNode.setData(data);
-	}
+	public void editData(String data) { this.currNode.setData(data); }
 
 	/**
-	 * @param name
-	 *                 to set node title to
+	 * @param name to set node title to
 	 */
-	public void editName(String name)
-	{
-		this.currNode.setName(name);
-	}
+	public void editName(String name) { this.currNode.setName(name); }
 
 	/**
 	 * @return the data associated with a node
 	 */
-	public String getData()
-	{
-		return this.currNode.getData();
-	}
+	public String getData() { return this.currNode.getData(); }
 
 	/**
 	 * @param year
 	 */
-	public void setYear(String year)
-	{
-		this.currPlanFile.setYear(year);
-	}
+	public void setYear(String year) { this.currPlanFile.setYear(year); }
 
 	/**
 	 * @return the cookie
 	 */
-	public String getCookie()
-	{
-		return cookie;
-	}
+	public String getCookie() { return cookie; }
 
 	/**
-	 * @param cookie
-	 *                   the cookie to set
+	 * @param cookie the cookie to set
 	 */
-	public void setCookie(String cookie)
-	{
-		this.cookie = cookie;
-	}
+	public void setCookie(String cookie) { this.cookie = cookie; }
 
 	/**
 	 * @return the currPlanFile
 	 */
-	public PlanFile getCurrPlanFile()
-	{
-		return currPlanFile;
-	}
+	public PlanFile getCurrPlanFile() { return currPlanFile; }
 
 	/**
-	 * @param currPlanFile
-	 *                         the currPlanFile to set
+	 * @param currPlanFile the currPlanFile to set
 	 */
-	public void setCurrPlanFile(PlanFile currPlanFile)
-	{
-		this.currPlanFile = currPlanFile;
-	}
+	public void setCurrPlanFile(PlanFile currPlanFile) { this.currPlanFile = currPlanFile; }
 
 	/**
 	 * @return the currNode
 	 */
-	public Node getCurrNode()
-	{
-		return currNode;
-	}
+	public Node getCurrNode() { return currNode; }
 
 	/**
-	 * @param currNode
-	 *                     the currNode to set
+	 * @param currNode the currNode to set
 	 */
-	public void setCurrNode(Node currNode)
-	{
-		this.currNode = currNode;
-	}
+	public void setCurrNode(Node currNode) { this.currNode = currNode; }
 
 	/**
 	 * @return the server
 	 */
-	public Server getServer()
-	{
-		return server;
-	}
+	public Server getServer() { return server; }
 
 	/**
-	 * @param server
-	 *                   the server to set
+	 * @param server the server to set
 	 */
-	public void setServer(Server server)
-	{
-		this.server = server;
-	}
+	public void setServer(Server server) { this.server = server; }
 
+	/**
+	 * @return the username
+	 */
+	public String getUsername() { return username; }
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) { this.username = username; }
 }

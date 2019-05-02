@@ -9,30 +9,30 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="324.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planSelectionView.PlanSelectionViewController">
+<BorderPane prefHeight="421.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planSelectionView.PlanSelectionViewController">
    <center>
       <VBox prefHeight="249.0" prefWidth="268.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane prefHeight="128.0" prefWidth="280.0">
+            <BorderPane prefHeight="182.0" prefWidth="579.0">
                <top>
                   <Label id="planTemplatesLabel" text="Plan Templates" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <ScrollPane fitToWidth="true" prefHeight="100.0" prefWidth="579.0" BorderPane.alignment="CENTER">
                      <content>
-                        <ListView id="planTemplatesListView" fx:id="planTemplateList" maxWidth="1.7976931348623157E308" onMouseClicked="#openPlanTemplate" prefHeight="200.0" />
+                        <ListView id="planTemplatesListView" fx:id="planTemplateList" maxWidth="1.7976931348623157E308" onMouseClicked="#openPlanTemplate" prefHeight="193.0" prefWidth="561.0" />
                      </content>
                   </ScrollPane>
                </center>
             </BorderPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <BorderPane prefHeight="210.0" prefWidth="579.0">
                <top>
                   <Label id="departmentPlansLabel" text="Department Plans" BorderPane.alignment="CENTER" />
                </top>
                <center>
-                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <ScrollPane fitToWidth="true" prefHeight="109.0" prefWidth="579.0" BorderPane.alignment="CENTER">
                      <content>
-                        <ListView id="departmentPlansListView" fx:id="departmentPlanList" maxWidth="1.7976931348623157E308" onMouseClicked="#openPlan" prefHeight="200.0" />
+                        <ListView id="departmentPlansListView" fx:id="departmentPlanList" maxWidth="1.7976931348623157E308" onMouseClicked="#openPlan" prefHeight="206.0" prefWidth="561.0" />
                      </content>
                   </ScrollPane>
                </center>
