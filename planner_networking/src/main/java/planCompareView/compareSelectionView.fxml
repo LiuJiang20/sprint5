@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planCompareView.compareSelectionViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planCompareView.compareSelectionViewController">
    <center>
       <VBox prefHeight="329.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <BorderPane>
                <center>
-                  <ListView fx:id="listA" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView id="listA" fx:id="listA" prefHeight="200.0" prefWidth="200.0" />
                </center>
                <top>
                   <Label text="Business plan A" BorderPane.alignment="CENTER" />
@@ -21,7 +21,7 @@
             </BorderPane>
             <BorderPane>
                <center>
-                  <ListView fx:id="listB" prefHeight="200.0" prefWidth="200.0" />
+                  <ListView id="listB" fx:id="listB" prefHeight="200.0" prefWidth="200.0" />
                </center>
                <top>
                   <Label text="Business plan B" BorderPane.alignment="CENTER" />

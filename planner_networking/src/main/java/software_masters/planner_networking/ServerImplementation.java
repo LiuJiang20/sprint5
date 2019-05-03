@@ -529,5 +529,5 @@ public class ServerImplementation implements Server {
 	 * @param args
 	 * @throws RemoteException
 	 */
-	public static void main(String[] args) throws RemoteException { ServerImplementation.spawn(); }
+	public static void main(String[] args) throws RemoteException { ServerImplementation.testSpawn(); }
 }
