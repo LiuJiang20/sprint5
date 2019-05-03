@@ -5,86 +5,16 @@
    <void id="Account0" method="get">
     <string>0</string>
     <void id="Department0" property="department">
-     <void property="planFileMap">
-      <void method="put">
-       <string>2009</string>
-       <object class="software_masters.planner_networking.PlanFile">
-        <void property="canEdit">
-         <boolean>true</boolean>
+     <void id="ConcurrentHashMap1" property="planFileMap">
+      <void id="PlanFile0" method="get">
+       <string>2019</string>
+       <void id="Centre0" property="plan">
+        <void property="root">
+         <void property="data">
+          <string>Change has been made</string>
+         </void>
         </void>
-        <void property="plan">
-         <object class="software_masters.planner_networking.Centre" id="Centre0">
-          <void property="name">
-           <string>Centre_Plan_1</string>
-          </void>
-          <void id="Node0" property="root">
-           <void property="children">
-            <void method="add">
-             <object class="software_masters.planner_networking.Node" id="Node1">
-              <void property="children">
-               <void method="add">
-                <object class="software_masters.planner_networking.Node" id="Node2">
-                 <void property="children">
-                  <void method="add">
-                   <object class="software_masters.planner_networking.Node" id="Node3">
-                    <void property="children">
-                     <void method="add">
-                      <object class="software_masters.planner_networking.Node">
-                       <void property="data">
-                        <string></string>
-                       </void>
-                       <void property="name">
-                        <string>Results</string>
-                       </void>
-                       <void property="parent">
-                        <object idref="Node3"/>
-                       </void>
-                      </object>
-                     </void>
-                    </void>
-                    <void property="data">
-                     <string></string>
-                    </void>
-                    <void property="name">
-                     <string>Assessment Process</string>
-                    </void>
-                    <void property="parent">
-                     <object idref="Node2"/>
-                    </void>
-                   </object>
-                  </void>
-                 </void>
-                 <void property="data">
-                  <string></string>
-                 </void>
-                 <void property="name">
-                  <string>Learning Objective</string>
-                 </void>
-                 <void property="parent">
-                  <object idref="Node1"/>
-                 </void>
-                </object>
-               </void>
-              </void>
-              <void property="data">
-               <string></string>
-              </void>
-              <void property="name">
-               <string>Goal</string>
-              </void>
-              <void property="parent">
-               <object idref="Node0"/>
-              </void>
-             </object>
-            </void>
-           </void>
-          </void>
-         </object>
-        </void>
-        <void property="year">
-         <string>2009</string>
-        </void>
-       </object>
+       </void>
       </void>
      </void>
     </void>
