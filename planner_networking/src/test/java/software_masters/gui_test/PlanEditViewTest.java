@@ -74,7 +74,7 @@ class PlanEditViewTest extends GuiTestBase {
 				(TreeView<Node> tree) -> { return tree.getRoot().getValue().getName().equals("Mission"); });
 		checkPage("Mission", "");
 	}
-
+ 
 	/**
 	 * Tests that add section is executed properly
 	 */

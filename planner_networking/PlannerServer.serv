@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="9.0.4" class="java.beans.XMLDecoder">
+<java version="1.8.0_181" class="java.beans.XMLDecoder">
  <object class="software_masters.planner_networking.ServerImplementation" id="ServerImplementation0">
   <void id="ConcurrentHashMap0" property="cookieMap">
    <void id="Account0" method="get">
@@ -9,28 +9,9 @@
       <void id="PlanFile0" method="get">
        <string>2019</string>
        <void id="Centre0" property="plan">
-        <void id="Node0" property="root">
-         <void property="comments">
-          <void method="add">
-           <object class="software_masters.planner_networking.Comment">
-            <void property="comment">
-             <string></string>
-            </void>
-            <void property="user">
-             <string>user</string>
-            </void>
-           </object>
-          </void>
-          <void method="add">
-           <object class="software_masters.planner_networking.Comment">
-            <void property="comment">
-             <string></string>
-            </void>
-            <void property="user">
-             <string>user</string>
-            </void>
-           </object>
-          </void>
+        <void property="root">
+         <void property="data">
+          <string>Change has been made</string>
          </void>
         </void>
        </void>

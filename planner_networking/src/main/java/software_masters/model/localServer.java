@@ -97,30 +97,24 @@ public class localServer implements Server {
 	public ConcurrentHashMap<String, Account> getCookieMap() throws RemoteException { return server.getCookieMap(); }
 
 	@Override
-	public void setCookieMap(ConcurrentHashMap<String, Account> cookieMap) throws RemoteException { // TODO
-																									// Auto-generated
-																									// method stub
+	public void setCookieMap(ConcurrentHashMap<String, Account> cookieMap) throws RemoteException {
 		server.setCookieMap(cookieMap);
 	}
 
 	@Override
-	public ConcurrentHashMap<String, Department> getDepartmentMap() throws RemoteException { // TODO Auto-generated
-																								// method stub
+	public ConcurrentHashMap<String, Department> getDepartmentMap() throws RemoteException {
 		return server.getDepartmentMap();
 	}
 
 	@Override
-	public void setDepartmentMap(ConcurrentHashMap<String, Department> departmentMap) throws RemoteException { // TODO
-																												// Auto-generated
-																												// method
-																												// stub
+	public void setDepartmentMap(ConcurrentHashMap<String, Department> departmentMap) throws RemoteException { 
 
 		server.setDepartmentMap(departmentMap);
 	}
 
 	@Override
-	public ConcurrentHashMap<String, PlanFile> getPlanTemplateMap() throws RemoteException { // TODO Auto-generated
-																								// method stub
+	public ConcurrentHashMap<String, PlanFile> getPlanTemplateMap() throws RemoteException { 
+																								
 		return server.getPlanTemplateMap();
 	}
 
@@ -131,12 +125,12 @@ public class localServer implements Server {
 	}
 
 	@Override
-	public Collection<PlanFile> listPlanTemplates() throws RemoteException { // TODO Auto-generated method stub
+	public Collection<PlanFile> listPlanTemplates() throws RemoteException {
 		return server.listPlanTemplates();
 	}
 
 	@Override
-	public Collection<PlanFile> listPlans(String cookie) throws RemoteException { // TODO Auto-generated method stub
+	public Collection<PlanFile> listPlans(String cookie) throws RemoteException {
 		return server.listPlans(cookie);
 	}
 
