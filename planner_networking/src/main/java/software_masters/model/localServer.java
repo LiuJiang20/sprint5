@@ -5,6 +5,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -48,14 +50,14 @@ public class localServer implements Server {
 	}
 
 	@Override
-	public void savePlan(PlanFile plan, String cookie) throws IllegalArgumentException, RemoteException {
+	public void savePlan(PlanFile plan, String cookie) throws IllegalArgumentException{
 
 		try {
 			server.savePlan(plan, cookie);
-		} catch (ConnectException e) {
+		} catch (RemoteException e) {
 			new pushPlan(plan, cookie).start();
 		}
-		}
+	}
 
 	@Override
 	public void addUser(String username, String password, String departmentName, boolean isAdmin, String cookie)
@@ -146,7 +148,7 @@ public class localServer implements Server {
 		PlanFile planFile;
 		String cookie;
 		localServer local;
-
+		String time;
 		public pushPlan(PlanFile planFile, String cookie) {
 			this.planFile = planFile;
 			this.cookie = cookie;
@@ -166,7 +168,11 @@ public class localServer implements Server {
 				e.printStackTrace();
 			} 
 			catch (IllegalArgumentException e) {
+//				String message = "The business plan"+ planFile.getYear()+" you saved at "+ time + "is not saved"
+//										+"\n The error message is:\n"+e.toString();
+//				model.view.sendError(message);
 				local.model.notifyMe(e.toString());
+				
 			
 			}
 			catch (RemoteException e) {
@@ -186,6 +192,9 @@ public class localServer implements Server {
 		@Override
 		public void run() {
 			System.out.println("IP "+ip+" port: "+port);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+			LocalDateTime now = LocalDateTime.now();
+			time = now.toString();
 			push();
 
 		}

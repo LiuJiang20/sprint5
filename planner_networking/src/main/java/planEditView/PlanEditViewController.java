@@ -1,13 +1,15 @@
 package planEditView;
 
-import java.lang.reflect.Method;
+
+
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import application.Main;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -184,8 +186,8 @@ public class PlanEditViewController {
 		} catch (IllegalArgumentException e) {
 			application.sendError("Cannot save changes to this plan");
 			return false;
-		} catch (RemoteException e) {
-			application.sendError("Cannot connect to server");
+		}catch (RemoteException e) {
+			application.sendError(e.toString());
 			return false;
 		}
 		return true;

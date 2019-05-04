@@ -160,7 +160,7 @@ public class MarkPlanTest extends GuiTestBase {
 		
 		clickOn("Save");
 	}
-	
+	 
 	private void checkUnMarkedBut(TreeView<String> treeView,boolean[] values) 
 	{
 		for (int i = 0; i < values.length; i++) 
@@ -170,22 +170,25 @@ public class MarkPlanTest extends GuiTestBase {
 	}
 	private void checkMarked(TreeView<String> treeView,int index,boolean val) 
 	{
-		clickOn(treeView);
-		if (index == 0) {
-			type(KeyCode.DOWN);
-			type(KeyCode.UP);
-			type(KeyCode.ENTER);
-		}
-		else 
-		{
-			for (int i = 0; i < index; i++) 
-			{
-				type(KeyCode.DOWN);
-			}
-			type(KeyCode.ENTER);
-		}
-		
-		String value = treeView.getSelectionModel().getSelectedItem().getValue();
+//		treeView.getSelectionModel().select(index);
+//		sleep(2000);
+////		if (index == 0) {
+////			type(KeyCode.UP);
+////			sleep(2000);
+////			type(KeyCode.ENTER);
+////		}
+////		else 
+//		{
+//			for (int i = 0; i < index; i++) 
+//			{
+//				type(KeyCode.DOWN);
+//			}
+//			type(KeyCode.ENTER);
+//		}
+//		
+		String value = treeView.getTreeItem(index).getValue();
+		System.out.println(value);
+		//String value = treeView.getSelectionModel().getSelectedItem().getValue();
 		assert value.contains("+") == val;
 	}
 	
@@ -199,10 +202,11 @@ public class MarkPlanTest extends GuiTestBase {
 		goToMarkPage();
 		sleep(5000);
 		boolean[] values = {false,false,false,false,false,true,true,true,true};
+		boolean[] values2 = {false,false,false,false,false};
 		TreeView<String> treeViewA = find(treeALabel);
 		TreeView<String> treeViewB = find(treeBLabel);
 		checkUnMarkedBut(treeViewA, values);
-		checkUnMarkedBut(treeViewB, values);
+		checkUnMarkedBut(treeViewB, values2);
 	}
 	
 	private void goToPlanEditView() 

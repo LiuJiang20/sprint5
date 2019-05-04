@@ -4,6 +4,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import application.Main;
 import software_masters.planner_networking.Client;
 import software_masters.planner_networking.Node;
 import software_masters.planner_networking.PlanFile;
@@ -14,7 +15,13 @@ public class PlannerModel extends Client {
 	/**
 	 * 
 	 */
-	public PlannerModel() { this.setServer(new localServer(this)); }
+	Main view;
+	public PlannerModel() { };
+	public  PlannerModel(Main view) 
+	{
+		this.view =view;
+		this.setServer(new localServer(this));
+	}
 
 	/**
 	 * @param server

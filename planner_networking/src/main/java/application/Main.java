@@ -54,7 +54,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.model = new PlannerModel();
+		this.model = new PlannerModel(this);
 		this.stage = new Stage();
 		this.commentStage = new Stage();
 		this.showConnectToServer();

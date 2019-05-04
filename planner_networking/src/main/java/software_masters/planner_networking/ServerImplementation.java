@@ -422,6 +422,7 @@ public class ServerImplementation implements Server {
 		return collections;
 	}
 
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -469,7 +470,7 @@ public class ServerImplementation implements Server {
 	/**
 	 * Attribute for singleton pattern
 	 */
-	private static Server server = null;
+	protected static Server server = null;
 
 	/**
 	 * Helper static method that allows us to use singleton pattern for testing.
