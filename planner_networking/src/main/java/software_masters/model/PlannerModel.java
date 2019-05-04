@@ -23,7 +23,7 @@ public class PlannerModel extends Client {
 
 	@Override
 	public void connectToServer(String ip, int port) throws RemoteException, NotBoundException {
-		((localServer) this.getServer()).connectToServer(ip, port);
+		((localServer) this.getServer()).connectToServer(ip,port);
 
 	}
 

@@ -53,12 +53,9 @@ public class localServer implements Server {
 		try {
 			server.savePlan(plan, cookie);
 		} catch (ConnectException e) {
-			new pushPlan(server, plan, cookie, this).start();
-		}catch (RemoteException e) {
-			System.out.println(e.toString());
+			new pushPlan(plan, cookie).start();
 		}
-		
-	}
+		}
 
 	@Override
 	public void addUser(String username, String password, String departmentName, boolean isAdmin, String cookie)
@@ -150,18 +147,15 @@ public class localServer implements Server {
 		String cookie;
 		localServer local;
 
-		public pushPlan(Server server, PlanFile planFile, String cookie, localServer local) {
-			this.server = server;
+		public pushPlan(PlanFile planFile, String cookie) {
 			this.planFile = planFile;
 			this.cookie = cookie;
-			this.local = local;
 		}
 
 		private void push() {
 			try {
-				System.out.println("Sending file to the server!");
-				Thread.sleep(4);
-				connectToServer(ip, port);
+				Thread.sleep(2000);
+				connectToServer();
 				server.savePlan(planFile, cookie);
 			} 
 			catch (ConnectException | NotBoundException e) {
@@ -181,6 +175,14 @@ public class localServer implements Server {
 			
 		}
 
+		private void connectToServer() throws RemoteException, NotBoundException 
+		{
+			Registry registry = LocateRegistry.getRegistry(ip, port);
+			server = (Server)registry.lookup("PlannerServer");
+			server.savePlan(planFile, cookie);
+			localServer.this.server = server;
+			
+		}
 		@Override
 		public void run() {
 			System.out.println("IP "+ip+" port: "+port);
