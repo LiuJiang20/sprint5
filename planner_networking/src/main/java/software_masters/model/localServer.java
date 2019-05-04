@@ -54,7 +54,10 @@ public class localServer implements Server {
 			server.savePlan(plan, cookie);
 		} catch (ConnectException e) {
 			new pushPlan(server, plan, cookie, this).start();
+		}catch (RemoteException e) {
+			System.out.println(e.toString());
 		}
+		
 	}
 
 	@Override

@@ -48,6 +48,7 @@ public class MarkPlanTest extends GuiTestBase {
 		
 		TreeView<String> treeViewA = find(treeALabel);
 		TreeView<String> treeViewB = find(treeBLabel);
+		clickOn("Mission");
 		noMark(treeViewA.getRoot());
 		noMark(treeViewB.getRoot());
 		clickOn("Close");

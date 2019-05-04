@@ -126,6 +126,7 @@ public class ServerImplementation implements Server {
 	 * planner_networking.PlanFile, java.lang.String)
 	 */
 	public void savePlan(PlanFile plan, String cookie) {
+		System.out.println("Real Server: save is called");
 		Integer.parseInt(plan.getYear());
 		cookieChecker(cookie);// checks that cookie is valid
 
@@ -494,6 +495,7 @@ public class ServerImplementation implements Server {
 		}
 		System.out.println("Connecting to Existing Server");
 	}
+	
 
 	/**
 	 * Helper static method that enforces a modified singleton pattern for program.
