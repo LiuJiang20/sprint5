@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planEditView.CommentEnterViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planEditView.CommentEnterViewController">
    <top>
       <HBox prefHeight="39.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="username" prefHeight="29.0" prefWidth="178.0" text="Username:">
+            <Label id="usernameLabel" fx:id="username" prefHeight="29.0" prefWidth="178.0" text="Username:">
                <font>
                   <Font size="18.0" />
                </font>
@@ -23,15 +23,15 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="31.0" prefWidth="132.0" text="Comment:">
+            <Label id="commentLabel" prefHeight="31.0" prefWidth="132.0" text="Comment:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="commentField" alignment="TOP_LEFT" prefHeight="356.0" prefWidth="600.0" />
+            <TextField id="commentField" fx:id="commentField" alignment="TOP_LEFT" prefHeight="356.0" prefWidth="600.0" />
             <BorderPane prefHeight="63.0" prefWidth="600.0">
                <left>
-                  <Button mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="107.0" text="Save" BorderPane.alignment="CENTER" />
+                  <Button id="commentSave" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="107.0" text="Save" BorderPane.alignment="CENTER" />
                </left>
                <right>
                   <Button mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="120.0" text="Cancel" BorderPane.alignment="CENTER" />

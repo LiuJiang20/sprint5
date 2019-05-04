@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planEditView.PlanEditViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planEditView.PlanEditViewController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <left>
@@ -80,15 +80,15 @@
    <right>
       <BorderPane BorderPane.alignment="CENTER">
          <center>
-            <ListView fx:id="commentsView" prefHeight="388.0" prefWidth="135.0" />
+            <ListView id="commentList" fx:id="commentsView" prefHeight="388.0" prefWidth="135.0" />
          </center>
          <top>
             <VBox BorderPane.alignment="CENTER">
                <children>
                   <HBox>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#addComment" prefHeight="27.0" prefWidth="90.0" text="Add " />
-                        <Button mnemonicParsing="false" onAction="#removeComment" prefHeight="27.0" prefWidth="82.0" text="Delete" />
+                        <Button id="addComment" mnemonicParsing="false" onAction="#addComment" prefHeight="27.0" prefWidth="90.0" text="Add " />
+                        <Button id="deleteComment" mnemonicParsing="false" onAction="#removeComment" prefHeight="27.0" prefWidth="82.0" text="Delete" />
                      </children>
                   </HBox>
                   <Label prefHeight="17.0" prefWidth="175.0" text="Comments:" />

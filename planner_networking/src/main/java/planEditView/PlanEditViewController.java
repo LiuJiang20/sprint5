@@ -67,22 +67,23 @@ public class PlanEditViewController {
 	public void removeComment() {
 		/*
 		 * Check if the user really wish to delete the comment*/
+		Comment remove = commentsView.getSelectionModel().getSelectedItem();
+		if (remove == null) {
+			application.sendError("No comment to remove!");
+			return;
+		}
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		String message = "Are you sure to delete the comment?";
 		alert.setContentText(message);
 		ButtonType okButton = new ButtonType("Yes");
 		ButtonType noButton = new ButtonType("No");
-		ButtonType cancelButton = new ButtonType("Cancel");
-		alert.getButtonTypes().setAll(okButton, noButton, cancelButton);
+		alert.getButtonTypes().setAll(okButton, noButton);
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == noButton) {
 			return;
 		}
 		
-		Comment remove = commentsView.getSelectionModel().getSelectedItem();
-		if (remove == null) {
-			application.sendError("No comment to remvoe!");
-		}
+		
 		Node currNode = model.getCurrNode();
 		currNode.removeComment(remove);
 		setListView();
@@ -267,10 +268,15 @@ public class PlanEditViewController {
 				
 			 }
 		});
-		
+		commentsView.refresh();
 	}
 	@FXML
-	public void comparePlans() { application.showCompareSelectionView(); }
+	public void comparePlans() 
+	{ 
+		changeSection();
+		application.showCompareSelectionView(); 
+		
+	}
 
 	/**
 	 * Initializes the year, name, and data text fields.
