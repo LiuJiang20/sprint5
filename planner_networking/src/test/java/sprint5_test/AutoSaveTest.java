@@ -8,12 +8,14 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.concurrent.TimeoutException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import org.testfx.api.FxAssert;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import application.Main;
@@ -34,8 +36,27 @@ public class AutoSaveTest extends GuiTestBase
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
+	/**
+	 * This closes the window and clears any action event after a test is executed.
+	 * 
+	 * @throws TimeoutException
+	 */
+	@AfterAll
+	public static void afterAllTest() throws TimeoutException {
+		FxToolkit.hideStage();
+		FxToolkit.cleanupStages();
+		try {
+			Registry registry = LocateRegistry.getRegistry("127.0.0.1", 1060);
+			TestServerInterface server = (TestServerInterface) registry.lookup("PlannerServer");
+			server.stop();
+		} catch (RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Test
 	public void mainTest()

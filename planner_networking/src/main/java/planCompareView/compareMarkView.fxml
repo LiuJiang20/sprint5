@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planCompareView.compareMarkViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="planCompareView.compareMarkViewController">
    <center>
       <HBox prefHeight="400.0" prefWidth="434.0" BorderPane.alignment="CENTER">
          <children>
             <BorderPane>
                <center>
-                  <TreeView id="treeViewA" fx:id="treeViewA" prefHeight="339.0" prefWidth="316.0" />
+                  <TreeView id="treeViewA" fx:id="treeViewA" prefHeight="405.0" prefWidth="443.0" />
                </center>
                <top>
                   <Label fx:id="labelA" text="Business plan A" BorderPane.alignment="CENTER" />
@@ -20,7 +20,7 @@
             </BorderPane>
             <BorderPane>
                <center>
-                  <TreeView id="treeViewB" fx:id="treeViewB" prefHeight="339.0" prefWidth="330.0" />
+                  <TreeView id="treeViewB" fx:id="treeViewB" prefHeight="405.0" prefWidth="451.0" />
                </center>
                <top>
                   <Label fx:id="labelB" text="Business plan B" BorderPane.alignment="CENTER" />
@@ -32,7 +32,7 @@
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="44.0" prefWidth="600.0" text="Result of comparison is displayed below.\n The difference has been marked by plus sign" />
+            <Label prefHeight="44.0" prefWidth="600.0" text="Result of comparison is displayed below.The difference has been marked by plus sign" />
             <Button fx:id="exitButton" mnemonicParsing="false" onAction="#close" prefHeight="27.0" prefWidth="162.0" text="Close" />
          </children>
       </HBox>

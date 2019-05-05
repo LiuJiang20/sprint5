@@ -5,7 +5,7 @@
    <void id="Account0" method="get">
     <string>0</string>
     <void id="Department0" property="department">
-     <void property="planFileMap">
+     <void id="ConcurrentHashMap1" property="planFileMap">
       <void method="put">
        <string>2009</string>
        <object class="software_masters.planner_networking.PlanFile">
@@ -85,6 +85,51 @@
          <string>2009</string>
         </void>
        </object>
+      </void>
+      <void id="PlanFile0" method="get">
+       <string>2019</string>
+       <void id="Centre1" property="plan">
+        <void id="Node4" property="root">
+         <void id="ArrayList0" property="children">
+          <void id="Node5" index="0">
+           <void property="comments">
+            <void method="add">
+             <object class="software_masters.planner_networking.Comment">
+              <void property="comment">
+               <string>Good comment.</string>
+              </void>
+              <void property="user">
+               <string>user</string>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="software_masters.planner_networking.Comment">
+              <void property="comment">
+               <string></string>
+              </void>
+              <void property="user">
+               <string>user</string>
+              </void>
+             </object>
+            </void>
+           </void>
+          </void>
+         </void>
+         <void property="comments">
+          <void method="add">
+           <object class="software_masters.planner_networking.Comment">
+            <void property="comment">
+             <string>Good</string>
+            </void>
+            <void property="user">
+             <string>user</string>
+            </void>
+           </object>
+          </void>
+         </void>
+        </void>
+       </void>
       </void>
      </void>
     </void>

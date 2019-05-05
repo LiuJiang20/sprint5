@@ -483,7 +483,14 @@ public class ServerImplementation implements Server {
 			Server stub = null;
 			try {
 				server = new ServerImplementation();
-				registry = LocateRegistry.createRegistry(1060);
+				try {
+					registry = LocateRegistry.createRegistry(1060);
+					
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				registry = LocateRegistry.getRegistry(1060);
 				stub = (Server) UnicastRemoteObject.exportObject(server, 0);
 				registry.bind("PlannerServer", stub);
 			} catch (RemoteException e) {
@@ -492,6 +499,7 @@ public class ServerImplementation implements Server {
 			} catch (AlreadyBoundException e) {
 				System.out.println("Connecting to Existing Server");
 			}
+
 			return;
 		}
 		System.out.println("Connecting to Existing Server");
