@@ -15,6 +15,15 @@ import software_masters.planner_networking.Department;
 import software_masters.planner_networking.PlanFile;
 import software_masters.planner_networking.Server;
 
+/**
+ * Proxy server that the model talks to.
+ * It connects to the real server by RMI
+ * 
+ * Most of its methods just call the same method in real server
+ * Only savePlan() is overridden.
+ * @author liu.jiang
+ *
+ */
 public class localServer implements Server {
 
 	Server server;
@@ -148,12 +157,15 @@ public class localServer implements Server {
 		PlanFile planFile;
 		String cookie;
 		localServer local;
-		String time;
 		public pushPlan(PlanFile planFile, String cookie) {
 			this.planFile = planFile;
 			this.cookie = cookie;
 		}
 
+		/**
+		 * Recursive method to push the plan to the real server
+		 * Also update the server in the parent controller
+		 */
 		private void push() {
 			try {
 				Thread.sleep(2000);
@@ -168,9 +180,6 @@ public class localServer implements Server {
 				e.printStackTrace();
 			} 
 			catch (IllegalArgumentException e) {
-//				String message = "The business plan"+ planFile.getYear()+" you saved at "+ time + "is not saved"
-//										+"\n The error message is:\n"+e.toString();
-//				model.view.sendError(message);
 				local.model.notifyMe(e.toString());
 				
 			
@@ -192,9 +201,6 @@ public class localServer implements Server {
 		@Override
 		public void run() {
 			System.out.println("IP "+ip+" port: "+port);
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-			LocalDateTime now = LocalDateTime.now();
-			time = now.toString();
 			push();
 
 		}

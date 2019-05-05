@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.function.IntPredicate;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
+import application.Main;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -13,13 +16,13 @@ import javafx.scene.input.KeyCode;
 import software_masters.gui_test.GuiTestBase;
 import software_masters.planner_networking.Node;
 
+
 public class MarkPlanTest extends GuiTestBase {
 
 	String listALabel = "#listA";
 	String listBLabel = "#listB";
 	String treeALabel = "#treeViewA";
 	String treeBLabel = "#treeViewB";
-	
 
 	@Test
 	public void mainTest() {
@@ -36,7 +39,7 @@ public class MarkPlanTest extends GuiTestBase {
 		write("2009");
 		clickOn("#saveButton");
 		
-		
+		//compare two identical business plans
 		clickOn("Compare Plans");
 		ListView<Node> listViewA = find(listALabel);
 		ListView<Node> listViewB = find(listBLabel);
@@ -55,6 +58,9 @@ public class MarkPlanTest extends GuiTestBase {
 		
 	}
 	
+	/** check if the tree has no mark, which means no difference between two plans
+	 * @param item
+	 */
 	private void noMark(TreeItem<String> item) 
 	{
 		assert !item.getValue().contains("+");
@@ -64,6 +70,11 @@ public class MarkPlanTest extends GuiTestBase {
 		}
 	}
 
+	/**
+	 * Helper method to select business plans to compare
+	 * @param listView
+	 * @param index
+	 */
 	private void selectItem(ListView<Node> listView, int index) 
 	{
 		clickOn(listView);
@@ -73,11 +84,13 @@ public class MarkPlanTest extends GuiTestBase {
 		}
 		type(KeyCode.ENTER);
 	}
+	
+	
 	private void sectionDifferentTest() 
 	{
 		String[] sequence = {"Mission","Goal","Learning Objective","Assessment Process","Results"};
 		expandTree(sequence);
-		
+		//change one plan's mission content
 		modifySection("Mission", "Mission", "Cool!");
 		goToMarkPage();
 		TreeView<String> treeViewA = find(treeALabel);
@@ -87,6 +100,7 @@ public class MarkPlanTest extends GuiTestBase {
 		checkUnMarkedBut(treeViewB, values);
 		clickOn("Close");
 		
+		//change one plan's mission title
 		modifySection("Mission", "Mission1", "");
 		goToMarkPage();
 		treeViewA = find(treeALabel);
@@ -95,18 +109,18 @@ public class MarkPlanTest extends GuiTestBase {
 		checkUnMarkedBut(treeViewB, values);
 		clickOn("Close");
 		
-		
+		//change one plan's goal title
 		boolean[] values2 = {false,true,false,false,false};
 		modifySection("Mission1", "Mission", "");
 		modifySection("Goal", "Goal1", "");
 		goToMarkPage();
 		treeViewA = find(treeALabel);
 		treeViewB = find(treeBLabel);
-		sleep(20000);
 		checkUnMarkedBut(treeViewA, values2);
 		checkUnMarkedBut(treeViewB, values2);
 		clickOn("Close");
 		
+		//change one plan's goal content
 		modifySection("Goal1", "Goal", "Cool!");
 		goToMarkPage();
 		treeViewA = find(treeALabel);
@@ -118,6 +132,9 @@ public class MarkPlanTest extends GuiTestBase {
 		modifySection("Goal", "Goal", "");
 	}
 	
+	/**
+	 * Helper method to go to the window that show the differences between two plans
+	 */
 	private void goToMarkPage() {
 		clickOn("Compare Plans");
 		ListView<Node> listViewA = find(listALabel);
@@ -128,6 +145,7 @@ public class MarkPlanTest extends GuiTestBase {
 		
 		clickOn("Compare");
 	}
+	
 	private void expandTree(String[] clickSequence) 
 	{
 		for (String string : clickSequence) 
@@ -137,6 +155,12 @@ public class MarkPlanTest extends GuiTestBase {
 	}
 	
 	
+	/**
+	 * Helper method to modify the section
+	 * @param section
+	 * @param title
+	 * @param content
+	 */
 	private void modifySection(String section, String title,String content) 
 	{
 		clickOn(section);
@@ -162,6 +186,12 @@ public class MarkPlanTest extends GuiTestBase {
 		clickOn("#saveButton");
 	}
 	 
+	/**
+	 * Helper method to check the marked state of each item in the tree
+	 * Values contains the marked state of the item should be false or true
+	 * @param treeView
+	 * @param values
+	 */
 	private void checkUnMarkedBut(TreeView<String> treeView,boolean[] values) 
 	{
 		for (int i = 0; i < values.length; i++) 
@@ -169,6 +199,13 @@ public class MarkPlanTest extends GuiTestBase {
 			checkMarked(treeView, i, values[i]);
 		}
 	}
+	
+	/**
+	 * check if the item at index row has the correct marked state
+	 * @param treeView
+	 * @param index
+	 * @param val
+	 */
 	private void checkMarked(TreeView<String> treeView,int index,boolean val) 
 	{
 	
@@ -180,11 +217,11 @@ public class MarkPlanTest extends GuiTestBase {
 	
 	private void branchDifferentTest() 
 	{
+		//add an entire branch on one business plan
 		clickOn("Goal");
 		clickOn("#addSectionButton");
 		clickOn("Save");
 		goToMarkPage();
-		sleep(5000);
 		boolean[] values = {false,false,false,false,false,true,true,true,true};
 		boolean[] values2 = {false,false,false,false,false};
 		TreeView<String> treeViewA = find(treeALabel);

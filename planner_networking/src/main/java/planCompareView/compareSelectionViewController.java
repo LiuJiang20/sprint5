@@ -28,9 +28,13 @@ public class compareSelectionViewController extends Controller {
 
 	}
 
+	/**
+	 * Change view to result page
+	 */
 	@FXML
 	public void compareTwoPlans() {
 		PlanFile fileA = listA.getSelectionModel().getSelectedItem();
+		// make sure exactly two plans are selected
 		if (fileA == null) {
 			getApplication().sendError("You haven't select file from list A!");
 			return;
@@ -51,7 +55,6 @@ public class compareSelectionViewController extends Controller {
 			getApplication().sendError(e.toString());
 		}
 		getModel().markPlan(fileA, fileB);
-		System.out.println("Mark Done!");
 		getApplication().showCompareMarkView(fileA, fileB);
 	}
 

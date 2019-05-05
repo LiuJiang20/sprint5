@@ -42,6 +42,9 @@ public class compareMarkViewController extends Controller {
 		fileB = b;
 	}
 
+	/**
+	 *  Close the window
+	 */
 	@FXML
 	public void close() {
 		System.out.println("Closing the stage");
@@ -51,6 +54,10 @@ public class compareMarkViewController extends Controller {
 
 	}
 
+	/**
+	 * Set all the marked values to false
+	 * @param root
+	 */
 	private void clearMark(Node root) {
 		root.setMarked(false);
 		for (Node child : root.getChildren()) {
@@ -66,14 +73,20 @@ public class compareMarkViewController extends Controller {
 		System.out.println("Treeview: " + treeViewA + " " + treeViewB);
 		System.out.println(labelA + "  " + labelB);
 		setTreeView();
-		setYear();
+		setFilename();
 	}
 
-	private void setYear() {
+	/**
+	 * Reset the labels that show two file names
+	 */
+	private void setFilename() {
 		labelA.setText(fileA.toString());
 		labelB.setText(fileB.toString());
 	}
 
+	/**
+	 *  Set the two treeView that show the differences between two plans
+	 */
 	private void setTreeView() {
 		treeViewA.setRoot(convertTree(fileA.getPlan().getRoot()));
 		treeViewB.setRoot(convertTree(fileB.getPlan().getRoot()));
@@ -87,7 +100,7 @@ public class compareMarkViewController extends Controller {
 	 */
 	private TreeItem<String> convertTree(Node root) {
 		String text = root.toString();
-		if (root.isMarked()) { text += " "+'\u002b' ; }
+		if (root.isMarked()) { text += " " + '+' ; }
 
 		TreeItem<String> newRoot = new TreeItem<String>(text);
 

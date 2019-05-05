@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +35,8 @@ public class AutoSaveTest extends GuiTestBase
 			e.printStackTrace();
 		}
 	}
+	
+
 	@Test
 	public void mainTest()
 	{
@@ -50,7 +53,7 @@ public class AutoSaveTest extends GuiTestBase
 	
 	private void autoSaveTest() 
 	{
-		//server is successfully shut down
+		//server is successfully shut down and then try to save the business plan
 		clickOn("Mission");
 		doubleClickOn("#dataField");
 		write("Change has been made");
@@ -60,7 +63,7 @@ public class AutoSaveTest extends GuiTestBase
 
 		//Restart the server
 		TestServer.testSpawn();
-		sleep(10000);
+		sleep(3000);
 		clickOn("#logoutButton");
 		clickOn("Log in");
 		clickOn("2019");
@@ -73,6 +76,7 @@ public class AutoSaveTest extends GuiTestBase
 	
 	private void saveFailTest() 
 	{
+		//server is successfully shut down and then try to save the business plan
 		clickOn("Mission");
 		TextField textField = find("#dataField");
 		textField.setText("OK");
@@ -81,11 +85,13 @@ public class AutoSaveTest extends GuiTestBase
 		clickOn("#logoutButton");
 		sleep(10000);
 		clickOn("Log in");
+		// since server is not online, re login should fail
 		checkPopupMsg("cannot connect to server");
 		clickOn("OK");
 		
+		//restart the server, now we should see the changed saved correctly
 		TestServer.testSpawn();
-		sleep(5000);
+		sleep(2000);
 		clickOn("Log in");
 		clickOn("2019");
 		clickOn("Mission");

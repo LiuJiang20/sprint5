@@ -3,6 +3,9 @@ package application;
 import software_masters.model.PlannerModel;
 
 public class Controller {
+	/**
+	 * OverArching controller. Defines useful methods all controllers share
+	 */
 	private Main application;
 	private PlannerModel model;
 
