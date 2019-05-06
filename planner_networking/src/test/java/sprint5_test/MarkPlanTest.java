@@ -1,14 +1,10 @@
 package sprint5_test;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 
-import java.util.function.IntPredicate;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-
-import application.Main;
+import org.testfx.api.FxAssert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -27,11 +23,68 @@ public class MarkPlanTest extends GuiTestBase {
 	@Test
 	public void mainTest() {
 		goToPlanEditView();
+		defaultValueTest();
+		errorMessageOnSelection();
 		identicalFileTest();
 		sectionDifferentTest();
 		branchDifferentTest();
 	}
-
+	private void defaultValueTest() 
+	{
+		clickOn("Compare Plans");
+		String selectLabel = "#compare-selectLabel";
+		FxAssert.verifyThat(selectLabel, (Label select)-> 
+		{return select.getText().equals("Please select one business plan from each list");});
+		String labelA = "#compare-labelA";
+		String labelB = "#compare-labelB";
+		
+		FxAssert.verifyThat(labelA, (Label label)-> 
+		{return label.getText().equals("Business plan A");});
+		
+		FxAssert.verifyThat(labelB, (Label label)-> 
+		{return label.getText().equals("Business plan B");});
+		
+		ListView<Node> listViewA = find(listALabel);
+		ListView<Node> listViewB = find(listBLabel);
+		selectItem(listViewA, 0);
+		selectItem(listViewB, 0);
+		clickOn("Compare");
+		String markLael = "#mark-label";
+		FxAssert.verifyThat(markLael, (Label label)-> 
+		{return label.getText().equals("Result of comparison is displayed below.The difference has been marked by plus sign");});
+		
+		labelA = "#mark-labelA";
+		labelB = "#mark-labelB";
+		
+		FxAssert.verifyThat(labelA, (Label label)-> 
+		{return label.getText().equals("2019");});
+		
+		FxAssert.verifyThat(labelB, (Label label)-> 
+		{return label.getText().equals("2019");});
+		clickOn("Close");
+		
+	}
+	
+	private void errorMessageOnSelection() 
+	{
+		clickOn("Compare Plans");
+		ListView<Node> listViewA = find(listALabel);
+		ListView<Node> listViewB = find(listBLabel);
+		
+		selectItem(listViewA, 0);
+		clickOn("Compare");
+		clickOn("OK");
+		
+		listViewA.getSelectionModel().clearSelection();
+		selectItem(listViewB, 0);
+		clickOn("Compare");
+		clickOn("OK");
+		
+		selectItem(listViewA, 0);
+		clickOn("Compare");
+		clickOn("Close");
+		
+	}
 	private void identicalFileTest() 
 	{
 		//Create identical PlanFile

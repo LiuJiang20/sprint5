@@ -64,14 +64,15 @@ public class AutoSaveTest extends GuiTestBase
 		goToPlanEditView();
 		autoSaveTest();
 		saveFailTest();
-
+		badFileTest();
 		
 	}
 	
 	
 	
 	
-	
+
+
 	private void autoSaveTest() 
 	{
 		//server is successfully shut down and then try to save the business plan
@@ -120,6 +121,21 @@ public class AutoSaveTest extends GuiTestBase
 		{ return textField1.getText().equals("OK"); });
 	}
 	
+	
+	
+	private void badFileTest() 
+	{ 
+		doubleClickOn("#editYearField");
+		write("2020");
+		endServer();
+		clickOn("Save");
+		TestServer.testSpawn();
+		sleep(5000);
+		String message ="Business plan "+"\""+"2020"+"\""+"You saved before failed.\n"
+				+"Here is the error message:\n"+ "java.lang.IllegalArgumentException: Not allowed to edit this plan";
+		checkPopupMsg(message);
+		clickOn("OK");
+	}
 	
 	private void goToPlanEditView() 
 	{

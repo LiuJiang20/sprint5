@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javafx.application.Platform;
 import software_masters.planner_networking.Account;
 import software_masters.planner_networking.Department;
 import software_masters.planner_networking.PlanFile;
@@ -180,7 +181,16 @@ public class localServer implements Server {
 				e.printStackTrace();
 			} 
 			catch (IllegalArgumentException e) {
-				local.model.notifyMe(e.toString());
+				String year = planFile.getYear();
+				String message = "Business plan "+"\""+year+"\""+"You saved before failed.\n"
+						+"Here is the error message:\n"+ e.toString();
+				System.out.println(message);
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() { 
+						model.getView().sendError(message);
+					}
+				});
 				
 			
 			}
@@ -204,6 +214,7 @@ public class localServer implements Server {
 			push();
 
 		}
+		
 
 	}
 

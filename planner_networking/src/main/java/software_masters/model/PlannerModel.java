@@ -128,5 +128,9 @@ public class PlannerModel extends Client {
 
 		}
 	}
+	public Main getView() { return view; }
+	public void setView(Main view) { this.view = view; }
+	
+	
 
 }

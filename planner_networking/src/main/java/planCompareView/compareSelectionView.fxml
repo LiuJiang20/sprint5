@@ -16,7 +16,7 @@
                   <ListView id="listA" fx:id="listA" prefHeight="200.0" prefWidth="200.0" />
                </center>
                <top>
-                  <Label text="Business plan A" BorderPane.alignment="CENTER" />
+                  <Label id="compare-labelA" text="Business plan A" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
             <BorderPane>
@@ -24,7 +24,7 @@
                   <ListView id="listB" fx:id="listB" prefHeight="200.0" prefWidth="200.0" />
                </center>
                <top>
-                  <Label text="Business plan B" BorderPane.alignment="CENTER" />
+                  <Label id="compare-labelB" text="Business plan B" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
          </children>
@@ -33,7 +33,7 @@
    <top>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="17.0" prefWidth="614.0" text="Please select one business plan from each list" />
+            <Label id="compare-selectLabel" prefHeight="17.0" prefWidth="614.0" text="Please select one business plan from each list" />
             <Button fx:id="compareButton" mnemonicParsing="false" onAction="#compareTwoPlans" prefHeight="27.0" prefWidth="294.0" text="Compare" />
          </children>
       </HBox>

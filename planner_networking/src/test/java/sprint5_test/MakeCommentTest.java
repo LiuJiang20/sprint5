@@ -26,7 +26,6 @@ public class MakeCommentTest extends GuiTestBase
 		
 	}
 	
-	
 	private void addCommentTest() {
 
 		//add a comment on mission

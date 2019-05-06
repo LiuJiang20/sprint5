@@ -15,7 +15,7 @@
                   <TreeView id="treeViewA" fx:id="treeViewA" prefHeight="405.0" prefWidth="443.0" />
                </center>
                <top>
-                  <Label fx:id="labelA" text="Business plan A" BorderPane.alignment="CENTER" />
+                  <Label id="mark-labelA" fx:id="labelA" text="Business plan A" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
             <BorderPane>
@@ -23,7 +23,7 @@
                   <TreeView id="treeViewB" fx:id="treeViewB" prefHeight="405.0" prefWidth="451.0" />
                </center>
                <top>
-                  <Label fx:id="labelB" text="Business plan B" BorderPane.alignment="CENTER" />
+                  <Label id="mark-labelB" fx:id="labelB" text="Business plan B" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
          </children>
@@ -32,7 +32,7 @@
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="44.0" prefWidth="600.0" text="Result of comparison is displayed below.The difference has been marked by plus sign" />
+            <Label id="mark-label" prefHeight="44.0" prefWidth="600.0" text="Result of comparison is displayed below.The difference has been marked by plus sign" />
             <Button fx:id="exitButton" mnemonicParsing="false" onAction="#close" prefHeight="27.0" prefWidth="162.0" text="Close" />
          </children>
       </HBox>
