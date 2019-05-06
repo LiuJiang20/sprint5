@@ -5,10 +5,5 @@ Running Notes:
 Run ServerImplementation.
 Run Main.
 
-Testing Notes:
-For previous sprints tests:
-Run ApplicationTest. It is a suite that runs all tests.
-For sprint 5 tests:
-Run sprint5_test package as a whole. Right click on the package and click on "Coverage as"
-and then click on "JUnit Test." All three tests should be able to run automatically.
 
+Run ApplicationTest. It is a suite that runs all tests. Sprint 5 tests are the first to run.
