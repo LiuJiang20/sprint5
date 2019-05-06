@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 public class MakeCommentTest extends GuiTestBase
 {
 	String addLabel = "#addComment";
-	String deleteLabel = "#addComment";
+	String deleteLabel = "#deleteComment";
 	String listviewLabel  = "#commentList";
 	@Test
 	public void mainTest()

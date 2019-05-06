@@ -1,23 +1,282 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_181" class="java.beans.XMLDecoder">
- <object class="sprint5_test.TestServer" id="TestServer0">
+ <object class="software_masters.planner_networking.ServerImplementation" id="ServerImplementation0">
   <void id="ConcurrentHashMap0" property="cookieMap">
    <void id="Account0" method="get">
     <string>0</string>
     <void id="Department0" property="department">
      <void id="ConcurrentHashMap1" property="planFileMap">
+      <void method="put">
+       <string>2009</string>
+       <object class="software_masters.planner_networking.PlanFile">
+        <void property="canEdit">
+         <boolean>true</boolean>
+        </void>
+        <void property="plan">
+         <object class="software_masters.planner_networking.Centre" id="Centre0">
+          <void property="name">
+           <string>Centre_Plan_1</string>
+          </void>
+          <void id="Node0" property="root">
+           <void property="children">
+            <void method="add">
+             <object class="software_masters.planner_networking.Node" id="Node1">
+              <void property="children">
+               <void method="add">
+                <object class="software_masters.planner_networking.Node" id="Node2">
+                 <void property="children">
+                  <void method="add">
+                   <object class="software_masters.planner_networking.Node" id="Node3">
+                    <void property="children">
+                     <void method="add">
+                      <object class="software_masters.planner_networking.Node">
+                       <void property="data">
+                        <string></string>
+                       </void>
+                       <void property="name">
+                        <string>Results</string>
+                       </void>
+                       <void property="parent">
+                        <object idref="Node3"/>
+                       </void>
+                      </object>
+                     </void>
+                    </void>
+                    <void property="data">
+                     <string></string>
+                    </void>
+                    <void property="name">
+                     <string>Assessment Process</string>
+                    </void>
+                    <void property="parent">
+                     <object idref="Node2"/>
+                    </void>
+                   </object>
+                  </void>
+                 </void>
+                 <void property="data">
+                  <string></string>
+                 </void>
+                 <void property="name">
+                  <string>Learning Objective</string>
+                 </void>
+                 <void property="parent">
+                  <object idref="Node1"/>
+                 </void>
+                </object>
+               </void>
+              </void>
+              <void property="data">
+               <string></string>
+              </void>
+              <void property="name">
+               <string>Goal</string>
+              </void>
+              <void property="parent">
+               <object idref="Node0"/>
+              </void>
+             </object>
+            </void>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="year">
+         <string>2009</string>
+        </void>
+       </object>
+      </void>
       <void id="PlanFile0" method="get">
        <string>2019</string>
-       <void id="Centre0" property="plan">
-        <void property="root">
-         <void property="data">
-          <string>OK</string>
+       <void property="canEdit">
+        <boolean>false</boolean>
+       </void>
+       <void id="Centre1" property="plan">
+        <void property="name">
+         <string>Centre_Plan_2</string>
+        </void>
+        <void id="Node4" property="root">
+         <void id="ArrayList0" property="children">
+          <void id="Node5" index="0">
+           <void property="comments">
+            <void method="add">
+             <object class="software_masters.planner_networking.Comment">
+              <void property="comment">
+               <string>Good comment.</string>
+              </void>
+              <void property="user">
+               <string>user</string>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="software_masters.planner_networking.Comment">
+              <void property="comment">
+               <string></string>
+              </void>
+              <void property="user">
+               <string>user</string>
+              </void>
+             </object>
+            </void>
+           </void>
+          </void>
+         </void>
+         <void property="comments">
+          <void method="add">
+           <object class="software_masters.planner_networking.Comment">
+            <void property="comment">
+             <string>Good</string>
+            </void>
+            <void property="user">
+             <string>user</string>
+            </void>
+           </object>
+          </void>
          </void>
         </void>
        </void>
       </void>
+      <void method="put">
+       <string>2016</string>
+       <object class="software_masters.planner_networking.PlanFile">
+        <void property="canEdit">
+         <boolean>true</boolean>
+        </void>
+        <void property="plan">
+         <object class="software_masters.planner_networking.Centre">
+          <void property="name">
+           <string>Centre_Plan_1</string>
+          </void>
+         </object>
+        </void>
+        <void property="year">
+         <string>2016</string>
+        </void>
+       </object>
+      </void>
+      <void method="put">
+       <string>20191</string>
+       <object class="software_masters.planner_networking.PlanFile">
+        <void property="canEdit">
+         <boolean>true</boolean>
+        </void>
+        <void property="plan">
+         <object class="software_masters.planner_networking.Centre" id="Centre2">
+          <void property="name">
+           <string>Centre_Plan_1</string>
+          </void>
+          <void id="Node6" property="root">
+           <void property="comments">
+            <void method="add">
+             <object class="software_masters.planner_networking.Comment">
+              <void property="comment">
+               <string>Good</string>
+              </void>
+              <void property="user">
+               <string>user</string>
+              </void>
+             </object>
+            </void>
+           </void>
+           <void property="data">
+            <string>1</string>
+           </void>
+           <void property="name">
+            <string>Mission1</string>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="year">
+         <string>20191</string>
+        </void>
+       </object>
+      </void>
+      <void method="put">
+       <string>20190</string>
+       <object class="software_masters.planner_networking.PlanFile">
+        <void property="canEdit">
+         <boolean>true</boolean>
+        </void>
+        <void property="plan">
+         <object class="software_masters.planner_networking.Centre" id="Centre3">
+          <void property="name">
+           <string>Centre_Plan_1</string>
+          </void>
+          <void id="Node7" property="root">
+           <void property="comments">
+            <void method="add">
+             <object class="software_masters.planner_networking.Comment">
+              <void property="comment">
+               <string>Good</string>
+              </void>
+              <void property="user">
+               <string>user</string>
+              </void>
+             </object>
+            </void>
+           </void>
+           <void property="data">
+            <string>mission edit</string>
+           </void>
+           <void property="name">
+            <string>Mission name field edit</string>
+           </void>
+          </void>
+         </object>
+        </void>
+        <void property="year">
+         <string>20190</string>
+        </void>
+       </object>
+      </void>
      </void>
     </void>
+   </void>
+   <void method="put">
+    <string>0c&apos;$yc&quot;&lt;q2K&gt;*gsc:pTib7mmy</string>
+    <object class="software_masters.planner_networking.Account" id="Account1">
+     <void property="cookie">
+      <string>0c&apos;$yc&quot;&lt;q2K&gt;*gsc:pTib7mmy</string>
+     </void>
+     <void property="department">
+      <object idref="Department0"/>
+     </void>
+     <void property="password">
+      <string>newUser</string>
+     </void>
+    </object>
+   </void>
+   <void method="put">
+    <string>Bn@%1]q!9^+LDO;3#e&quot;P@2xdA</string>
+    <object class="software_masters.planner_networking.Account" id="Account2">
+     <void property="cookie">
+      <string>Bn@%1]q!9^+LDO;3#e&quot;P@2xdA</string>
+     </void>
+     <void property="department">
+      <object class="software_masters.planner_networking.Department" id="Department1"/>
+     </void>
+     <void property="password">
+      <string>testDepartment</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="departmentMap">
+   <void method="put">
+    <string>newDepartment</string>
+    <object idref="Department1"/>
+   </void>
+  </void>
+  <void property="loginMap">
+   <void method="put">
+    <string>newUser</string>
+    <object idref="Account1"/>
+   </void>
+   <void method="put">
+    <string>testDepartment</string>
+    <object idref="Account2"/>
    </void>
   </void>
  </object>

@@ -122,6 +122,7 @@ class PlanEditViewTest extends GuiTestBase {
 		doubleClickOn("Mission");
 		clickOn((javafx.scene.Node) find("Go 1"));
 		clickOn(deleteButtonID);
+		sleep(2000);
 		checkPopupMsg(
 				"Are you sure you want to delete this section and all dependencies?" + "They cannot be recovered.");
 		clickOn((javafx.scene.Node) find("Don't Delete"));
@@ -130,7 +131,7 @@ class PlanEditViewTest extends GuiTestBase {
 		clickOn(deleteButtonID);
 		checkPopupMsg(
 				"Are you sure you want to delete this section and all dependencies?" + "They cannot be recovered.");
-		clickOn((javafx.scene.Node) find("Delete"));
+		clickOn("#alert-delete");
 		checkBranch();
 		verifyThat(treeViewID, (TreeView<Node> treeview) -> {
 			if (treeview.getRoot().getChildren().size() != 1) return false;
@@ -146,7 +147,7 @@ class PlanEditViewTest extends GuiTestBase {
 		clickOn(deleteButtonID);
 		checkPopupMsg(
 				"Are you sure you want to delete this section and all dependencies?" + "They cannot be recovered.");
-		clickOn((javafx.scene.Node) find("Delete"));
+		clickOn("#alert-delete");
 		checkPopupMsg("Cannot delete this section");
 		clickOn("OK");
 
@@ -158,10 +159,12 @@ class PlanEditViewTest extends GuiTestBase {
 		checkPage("Mission", "");
 
 		clickOn("Goal");
+		sleep(2000);
 		clickOn(deleteButtonID);
 		checkPopupMsg(
 				"Are you sure you want to delete this section and all dependencies?" + "They cannot be recovered.");
-		clickOn((javafx.scene.Node) find("Delete"));
+		clickOn("#alert-delete");
+		sleep(2000);
 		checkPopupMsg("Cannot delete this section");
 		clickOn("OK");
 
@@ -199,7 +202,7 @@ class PlanEditViewTest extends GuiTestBase {
 
 		clickOn("Goal original");
 		clickOn(deleteButtonID);
-		clickOn("Delete");
+		clickOn("#alert-delete");
 		clickOn(saveID);
 		clickOn(backID);
 		clickOn("20190");
@@ -234,7 +237,7 @@ class PlanEditViewTest extends GuiTestBase {
 		doubleClickOn("Mission1"); // This also tests that treeview labels change in response to name field edits
 		clickOn("Goal");
 		clickOn(deleteButtonID);
-		clickOn("Delete");
+		clickOn("#alert-delete");
 		clickOn(logoutID);
 		checkPopupMsg("You have unsaved changes. Do you wish to save before exiting?");
 		clickOn("Cancel");

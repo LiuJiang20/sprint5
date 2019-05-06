@@ -87,8 +87,14 @@
                <children>
                   <HBox>
                      <children>
-                        <Button id="addComment" mnemonicParsing="false" onAction="#addComment" prefHeight="27.0" prefWidth="90.0" text="Add " />
-                        <Button id="deleteComment" mnemonicParsing="false" onAction="#removeComment" prefHeight="27.0" prefWidth="82.0" text="Delete" />
+                        <Button id="addComment" mnemonicParsing="false" onAction="#addComment" prefHeight="27.0" prefWidth="90.0" text="Add ">
+                           <tooltip>
+                              <Tooltip text="Add Comment" />
+                           </tooltip></Button>
+                        <Button id="deleteComment" mnemonicParsing="false" onAction="#removeComment" prefHeight="27.0" prefWidth="82.0" text="Delete">
+                           <tooltip>
+                              <Tooltip text="Delete Comment" />
+                           </tooltip></Button>
                      </children>
                   </HBox>
                   <Label prefHeight="17.0" prefWidth="175.0" text="Comments:" />

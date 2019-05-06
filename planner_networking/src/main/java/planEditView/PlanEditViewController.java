@@ -20,6 +20,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import software_masters.model.PlannerModel;
 import software_masters.planner_networking.Comment;
 import software_masters.planner_networking.Node;
@@ -102,6 +103,8 @@ public class PlanEditViewController {
 		ButtonType okButton = new ButtonType("Delete");
 		ButtonType noButton = new ButtonType("Don't Delete");
 		alert.getButtonTypes().setAll(okButton, noButton);
+		Button ob = (Button) alert.getDialogPane().lookupButton(okButton);
+		ob.setId("alert-delete");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == okButton) {
 			try {
